@@ -1,0 +1,10 @@
+This is where most people get confused.
+
+./ → current directory
+
+../ → one directory up
+
+../../ → two directories up
+
+
+letttr spacing

@@ -1,0 +1,10 @@
+.errdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #e60023;
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+}

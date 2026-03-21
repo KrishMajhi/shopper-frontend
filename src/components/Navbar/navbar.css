@@ -1,0 +1,159 @@
+/* ── NAVBAR ── */
+.mainnav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 92vw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo-and-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.company-name {
+  color: #FF8C00;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Nav items list */
+.navitems-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.navitems {
+  position: relative;
+  cursor: pointer;
+  font-size: 17px;
+  color: hsl(325deg 10% 55%);
+  text-decoration: none;
+  padding: 4px 6px;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.navitems::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #00ff15;
+  box-shadow: 0 0 8px rgba(69, 249, 87, 0.7);
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+.navitems:hover {
+  color: #111;
+}
+
+.navitems:hover::after {
+  width: 100%;
+}
+
+.navitems.active {
+  color: #111;
+}
+
+.navitems.active::after {
+  width: 100%;
+  background: #00ffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+/* Nav buttons */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.loginbtn {
+  background: wheat;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(245, 222, 179, 0.5);
+}
+
+.loginbtn:hover {
+  background: #f5deb3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(244, 164, 96, 0.7);
+}
+
+.loginbtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(222, 184, 135, 0.5);
+}
+
+/* Cart icon */
+.carticon {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.carticon::before {
+  content: attr(data-count);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 16px;
+  z-index: 1;
+}
+
+#cartimg {
+  transition: transform 0.3s ease;
+}
+
+.carticon:hover #cartimg {
+  transform: rotate(-9deg);
+}
+
+/* Drag-to-cart drop zone */
+.cart-drop-zone {
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.cart-drop-zone.drag-over {
+  background-color: rgba(0, 255, 0, 0.15);
+}
