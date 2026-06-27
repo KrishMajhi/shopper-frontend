@@ -1,2 +1,4 @@
-.collection { padding: 80px 7vw; background: var(--color-surface); }
-.collection-grid { display:flex; flex-wrap:wrap; gap:20px; }
+.collection { padding: 80px 5vw; background: var(--color-paper-2); border-top: 2px solid var(--color-ink); border-bottom: 2px solid var(--color-ink); }
+.collection .section-head { margin-bottom:36px; display:flex; flex-direction:column; gap:10px; }
+.collection .section-title { font-size:clamp(1.9rem,4vw,2.8rem); }
+.collection-grid { display:flex; flex-wrap:wrap; gap:22px; }

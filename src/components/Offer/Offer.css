@@ -1,18 +1,42 @@
-.offer-section { padding:80px 7vw; }
-.offer-header { margin-bottom:36px; }
-.offer-card { display:flex; align-items:center; justify-content:space-between; background: var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); overflow:hidden; min-height:280px; padding: 48px 56px; gap:40px; animation: offerFade 0.5s ease; position:relative; }
-.offer-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 20% 50%, rgba(201,168,108,0.07) 0%, transparent 60%); pointer-events:none; }
-@keyframes offerFade { from{opacity:0; transform:translateX(20px)} to{opacity:1; transform:none} }
-.offer-tag { display:inline-block; font-family:var(--font-mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--color-amber); border:1px solid rgba(201,168,108,0.3); padding:4px 12px; border-radius:999px; margin-bottom:16px; }
-.offer-heading { font-family:var(--font-display); font-size:2.4rem; font-weight:600; color:var(--color-ink); line-height:1.15; margin-bottom:12px; }
-.offer-desc { font-size:15px; color:var(--color-ink-2); margin-bottom:28px; }
-.offer-cta { background:var(--color-amber); color:var(--color-bg); border:none; padding:12px 28px; border-radius:var(--radius-md); font-weight:600; font-size:13.5px; transition:all var(--transition); }
-.offer-cta:hover { background:var(--color-amber-lt); transform:translateY(-2px); }
-.offer-img { height:240px; object-fit:contain; border-radius:var(--radius-lg); filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4)); }
-.offer-controls { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:24px; }
+.offer-section { padding:80px 5vw; }
+.offer-header { margin-bottom:32px; display:flex; flex-direction:column; gap:10px; }
+.offer-header .section-title { font-size:clamp(1.9rem,4vw,2.8rem); }
+.offer-card {
+  display:flex; align-items:center; justify-content:space-between;
+  background: var(--color-card);
+  border: 2px solid var(--color-ink);
+  overflow:hidden; min-height:280px; padding: 44px 52px; gap:40px;
+  animation: offerFade 0.45s ease;
+  position:relative;
+}
+@keyframes offerFade { from{opacity:0; transform:translateX(16px)} to{opacity:1; transform:none} }
+.offer-tag {
+  display:inline-block; font-family:var(--font-tag); font-size:11px;
+  letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
+  color: #fff; background: var(--color-poppy);
+  padding:5px 12px; margin-bottom:18px;
+}
+.offer-heading {
+  font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  font-size:2.2rem; color:var(--color-ink); line-height:1.08; margin-bottom:14px;
+}
+.offer-desc { font-size:14.5px; color:var(--color-ink-2); margin-bottom:26px; }
+.offer-cta {
+  background: var(--color-ink); color: var(--color-paper); border: 2px solid var(--color-ink);
+  padding: 12px 26px; font-family: var(--font-tag); font-weight:700;
+  font-size:12px; letter-spacing:1px; text-transform:uppercase;
+  transition:all var(--transition);
+}
+.offer-cta:hover { background: var(--color-poppy); border-color: var(--color-poppy); color:#fff; }
+.offer-img { height:230px; object-fit:contain; filter: drop-shadow(6px 6px 0 var(--color-paper-2)); }
+.offer-controls { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:22px; }
 .offer-dots { display:flex; gap:8px; }
-.dot { width:8px; height:8px; border-radius:50%; border:none; background:var(--color-ink-3); transition:all var(--transition); cursor:pointer; }
-.dot.active { width:24px; border-radius:4px; background:var(--color-amber); }
-.pause-btn { background:none; border:1px solid var(--color-border-2); color:var(--color-ink-2); padding:6px 14px; border-radius:999px; font-size:12px; transition:all var(--transition); }
-.pause-btn:hover { border-color:var(--color-border); color:var(--color-ink); }
-@media (max-width:640px) { .offer-card { flex-direction:column; padding:32px 28px; } .offer-img { height:180px; } }
+.dot { width:9px; height:9px; border-radius:50%; border:2px solid var(--color-ink); background:none; transition:all var(--transition); cursor:pointer; }
+.dot.active { width:9px; background: var(--color-poppy); border-color: var(--color-poppy); }
+.pause-btn {
+  background:none; border:1.5px solid var(--color-border); color:var(--color-ink-2);
+  padding:6px 14px; font-family: var(--font-tag); font-size:11px; letter-spacing:0.5px;
+  transition:all var(--transition);
+}
+.pause-btn:hover { border-color: var(--color-ink); color: var(--color-ink); }
+@media (max-width:640px) { .offer-card { flex-direction:column; padding:30px 26px; } .offer-img { height:170px; } }

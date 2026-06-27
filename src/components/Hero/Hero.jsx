@@ -35,10 +35,14 @@ function Hero() {
       <div className={`hero-right${mounted ? " in" : ""}`}>
         <div className="hero-img-frame">
           <img src={heroImg} alt="Fashion" className="hero-img" />
-          <div className="img-glow" />
         </div>
-        <div className="floating-tag tag-1"><span className="tag-dot" /><span>New Arrivals</span></div>
-        <div className="floating-tag tag-2"><span className="tag-dot" /><span>Best Sellers</span></div>
+        <div className="price-sticker">
+          <span className="sticker-top">New In</span>
+          <span className="sticker-main">SS/25</span>
+          <span className="sticker-bottom">Collection</span>
+        </div>
+        <div className="floating-tag tag-1"><span>New Arrivals</span></div>
+        <div className="floating-tag tag-2"><span>Best Sellers</span></div>
       </div>
     </section>
   );

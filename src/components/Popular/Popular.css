@@ -1,5 +1,4 @@
-.popular { padding: 80px 7vw; }
-.section-head { margin-bottom:40px; }
-.section-eyebrow { display:block; font-family:var(--font-body); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:4px; color:var(--color-amber); margin-bottom:12px; }
-.section-title { font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:600; color:var(--color-ink); letter-spacing:-0.5px; }
-.popular-grid { display:flex; flex-wrap:wrap; gap:20px; }
+.popular { padding: 80px 5vw; }
+.section-head { margin-bottom:36px; display:flex; flex-direction:column; gap:10px; }
+.popular .section-title { font-size:clamp(1.9rem,4vw,2.8rem); }
+.popular-grid { display:flex; flex-wrap:wrap; gap:22px; }

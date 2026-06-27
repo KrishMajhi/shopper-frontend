@@ -40,7 +40,8 @@ function Items({ Pimg, Pname, Nprice, Oprice, id, desc, product }) {
       </Link>
       <div className="item-info">
         <p className="item-name">{Pname}</p>
-        <div className="item-prices">
+        <div className="price-tag">
+          <span className="tag-hole" />
           <span className="item-price">₹{Nprice}</span>
           {Oprice && <span className="item-old">₹{Oprice}</span>}
         </div>
