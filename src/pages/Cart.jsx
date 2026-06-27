@@ -2,91 +2,72 @@ import React from "react";
 import "./css/CartPage.css";
 import { useShop } from "../Context/ShopContext";
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../components/Footer/Footer";
 const Cart = () => {
-  const { removeFromCart, cartItems, updateincart, setCartItems } = useShop();
-
-  const increment = (item) => {
-    const newQty = item.qty + 1;
-    updateincart(item.id, newQty * item.Price, newQty);
-  };
-
-  const decrement = (item) => {
-    const newQty = item.qty > 1 ? item.qty - 1 : 1;
-    updateincart(item.id, newQty * item.Price, newQty);
-  };
-
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.pTotal, 0);
-
+  const { removeFromCart, cartItems, updateincart } = useShop();
+  const inc = (item) => updateincart(item.id, (item.qty+1)*item.Price, item.qty+1);
+  const dec = (item) => { const q = item.qty > 1 ? item.qty-1 : 1; updateincart(item.id, q*item.Price, q); };
+  const subtotal = cartItems.reduce((a,i) => a+i.pTotal, 0);
+  const shipping = cartItems.length > 0 ? 99 : 0;
   return (
-    <div className="cart-page">
-      <div className="cart-container">
-
-        {/* ── Left: items ── */}
-        <div className="cart-items">
-          <h2 className="cart-h">Your Cart 🛒</h2>
-
-          {/* Column headers */}
-          <div className="col-name">
-            <span className="col-item" style={{ flex: "0 0 60px" }}></span>
-            <span className="col-item" style={{ flex: "0 0 90px" }}>Product</span>
-            <span className="col-item" style={{ flex: 1 }}>About</span>
-            <span className="col-item" style={{ width: "100px", textAlign: "center" }}>Qty</span>
-            <span className="col-item" style={{ width: "80px", textAlign: "right" }}>Price</span>
-            <span className="col-item" style={{ width: "80px", textAlign: "right" }}>Total</span>
+    <div>
+      <div className="cart-page">
+        <div className="cart-head">
+          <h1 className="cart-title">Your Cart</h1>
+          <p className="cart-sub">{cartItems.length} item{cartItems.length!==1?"s":""}</p>
+        </div>
+        <div className="cart-layout">
+          <div className="cart-items">
+            {cartItems.length === 0 && (
+              <div className="cart-empty">
+                <FontAwesomeIcon icon={faShoppingBag} className="cart-empty-icon" />
+                <h3>Your cart is empty</h3>
+                <p>Add some products and come back here.</p>
+                <Link to="/"><button className="cart-empty-btn">Continue Shopping</button></Link>
+              </div>
+            )}
+            {cartItems.map(item => (
+              <div className="cart-item" key={item.id}>
+                <Link to={`/products/${item.id}`}><img src={item.image} alt={item.name} className="cart-item-img" /></Link>
+                <div className="cart-item-details">
+                  <div className="cart-item-top">
+                    <h3 className="cart-item-name">{item.name}</h3>
+                    <button className="cart-remove" onClick={() => removeFromCart(item.id)}><FontAwesomeIcon icon={faXmark} /></button>
+                  </div>
+                  <p className="cart-item-cat">Clothing</p>
+                  <div className="cart-item-bottom">
+                    <div className="qty-ctrl">
+                      <button className="qty-btn" onClick={()=>dec(item)}>−</button>
+                      <span className="qty-val">{item.qty}</span>
+                      <button className="qty-btn" onClick={()=>inc(item)}>+</button>
+                    </div>
+                    <div className="cart-item-prices">
+                      <span className="cart-item-unit">₹{item.Price} each</span>
+                      <span className="cart-item-total">₹{item.pTotal}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-
-          {cartItems.length === 0 && (
-            <p style={{ color: "#aaa", padding: "32px 0", textAlign: "center" }}>
-              Your cart is empty.
-            </p>
-          )}
-
-          {cartItems.map((item) => (
-            <div className="cart-item" key={item.id}>
-              {/* Remove */}
-              <span className="remove-btn" onClick={() => removeFromCart(item.id)}>✕</span>
-
-              {/* Image */}
-              <Link to={`/products/${item.id}`}>
-                <img src={item.image} alt={item.name} />
-              </Link>
-
-              {/* Details */}
-              <div className="item-details">
-                <h3>{item.name}</h3>
-                <p>Clothing item</p>
+          {cartItems.length > 0 && (
+            <div className="cart-summary">
+              <h2 className="summary-title">Order Summary</h2>
+              <div className="summary-rows">
+                <div className="summary-row"><span>Subtotal</span><span>₹{subtotal}</span></div>
+                <div className="summary-row"><span>Shipping</span><span>₹{shipping}</span></div>
+                <div className="summary-row summary-total"><span>Total</span><span>₹{subtotal+shipping}</span></div>
               </div>
-
-              {/* Qty */}
-              <div className="qty-control">
-                <button onClick={() => decrement(item)} className="qty-btn">−</button>
-                <span className="qty-display">{item.qty}</span>
-                <button onClick={() => increment(item)} className="qty-btn">+</button>
-              </div>
-
-              {/* Price */}
-              <span className="price-sectionp">₹{item.Price}</span>
-
-              {/* Total */}
-              <span className="price-sectionp">₹{item.pTotal}</span>
+              <button className="checkout-btn">Proceed to Checkout →</button>
+              <Link to="/" className="continue-link">← Continue Shopping</Link>
             </div>
-          ))}
-
-          <hr style={{ marginTop: "16px", borderColor: "#eee" }} />
+          )}
         </div>
-
-        {/* ── Right: summary ── */}
-        <div className="cart-summary">
-          <h2>Summary</h2>
-          <p>Total Items: {cartItems.length}</p>
-          <p>Total Price: ₹{cartTotal}</p>
-          <button onClick={() => setCartItems([])}>Proceed to Checkout</button>
-        </div>
-
       </div>
+      <Footer />
     </div>
   );
 };
-
 export default Cart;

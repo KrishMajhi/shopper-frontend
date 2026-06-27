@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Newsletter.css";
-
 function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [done, setDone] = useState(false);
+  const handle = (e) => { e.preventDefault(); if(email) setDone(true); };
   return (
-    <div className="newsletter-container">
-      <h2 className="col-h" style={{color:"#73a286"}}>Stay Updated!</h2>
-      <p className="newsletter-text">
-        Subscribe to our newsletter and be the first to know about new collections, exclusive deals, and more.
-      </p>
-      <form className="newsletter-form">
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="newsletter-input"
-          required
-        />
-        <button type="submit" className="newsletter-button">
-          Subscribe
-        </button>
-      </form>
-    </div>
+    <section className="nl-section reveal">
+      <div className="nl-inner">
+        <span className="section-eyebrow">Stay in the Loop</span>
+        <h2 className="nl-title">Get Exclusive Access</h2>
+        <p className="nl-sub">Be first to know about new drops, member-only deals, and style tips.</p>
+        {done ? (
+          <p className="nl-thanks">✓ You're on the list! Watch your inbox.</p>
+        ) : (
+          <form className="nl-form" onSubmit={handle}>
+            <input type="email" placeholder="your@email.com" value={email} onChange={e=>setEmail(e.target.value)} className="nl-input" required />
+            <button type="submit" className="nl-btn">Subscribe</button>
+          </form>
+        )}
+      </div>
+    </section>
   );
 }
-
 export default Newsletter;

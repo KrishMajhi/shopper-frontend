@@ -1,0 +1,5 @@
+.marquee-wrap { overflow: hidden; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 14px 0; }
+.marquee-track { display: flex; align-items: center; gap: 24px; white-space: nowrap; animation: marqueeScroll 28s linear infinite; width: max-content; }
+.marquee-word { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--color-ink-2); text-transform: uppercase; }
+.marquee-dot { color: var(--color-amber); font-size: 1rem; }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }

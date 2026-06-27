@@ -1,28 +1,21 @@
 import React from "react";
 import "./collection.css";
-import new_collections from "../../assets/new_collections";
+import { useShop } from "../../Context/ShopContext";
 import Items from "../items/Items";
 function Newcollections() {
+  const { collection_products } = useShop();
   return (
-    <div className="collection-container ">
-      {/* <h2 className="col-h  cool-glow-text">New Collections</h2> */}
-      <h2 className="col-h">New Collections</h2>
-
-      <div className="collection-items">
-        {new_collections.map((item, id) => (
-          <Items
-            key={id}
-            Pname={item.name}
-            Pimg={item.image}
-            Nprice={item.new_price}
-            Oprice={item.old_price}
-            id={item.id}
-            product={"new_collection"}
-          />
+    <section className="collection">
+      <div className="section-head reveal">
+        <span className="section-eyebrow">Just In</span>
+        <h2 className="section-title">New Collections</h2>
+      </div>
+      <div className="collection-grid reveal reveal-delay-2">
+        {collection_products.map((item, i) => (
+          <Items key={i} Pname={item.name} Pimg={item.image} Nprice={item.new_price} Oprice={item.old_price} id={item.id} product="new_collection" />
         ))}
       </div>
-    </div>
-  ); 
+    </section>
+  );
 }
-
 export default Newcollections;

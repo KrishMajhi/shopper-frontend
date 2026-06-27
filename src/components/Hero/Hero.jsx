@@ -1,41 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Hero.css";
-// import heroImg from "../assets/product_32.png";
 import heroImg from "../../assets/hero_image.png";
-// import heroImg from "../../";
+import { Link } from "react-router-dom";
+
+const STATS = [
+  { value: "12K+", label: "Products" },
+  { value: "98%",  label: "Satisfaction" },
+  { value: "3",    label: "Collections" },
+];
 
 function Hero() {
-  console.log("Hero is rendering");
-
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setMounted(true), 80); return () => clearTimeout(t); }, []);
   return (
-    <div className="main-container-hero">
-      <div className="hero-left">
-        <div className="text-container">
-          {/* <h2 className="hero-h">NEW ARRIVALS ONLY!</h2> */}
-          <h2 className="hero-heading">Style That Speaks For You</h2>
-
-          {/* <p className="p-hero">
-            <span style={{ fontWeight: 300, color: "black" }}>New👋</span>{" "}
-            Collections for everyone
-          </p> */}
-          <p className="p-hero">
-            <span style={{ fontWeight: 300, color: "black" }}>Fresh</span>{" "}
-            styles
-            <br />
-            for bold confidence — made for you
-          </p>
+    <section className="hero">
+      <div className="hero-grid" />
+      <div className={`hero-left${mounted ? " in" : ""}`}>
+        <span className="hero-eyebrow">New Season · SS 2025</span>
+        <h1 className="hero-headline">Style That<br /><em>Speaks</em><br />For You</h1>
+        <p className="hero-sub">Curated fashion for every moment — discover pieces that define you.</p>
+        <div className="hero-cta">
+          <Link to="/women"><button className="cta-primary">Shop Collection</button></Link>
+          <Link to="/men"><button className="cta-ghost">Explore Men →</button></Link>
         </div>
-        <div className="btn">Shop New Arrivals →</div>
+        <div className="hero-stats">
+          {STATS.map((s, i) => (
+            <div key={i} className="stat">
+              <span className="stat-val">{s.value}</span>
+              <span className="stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div className="hero-right">
-        <img src={heroImg} className="shadow-img" alt="" />
+      <div className={`hero-right${mounted ? " in" : ""}`}>
+        <div className="hero-img-frame">
+          <img src={heroImg} alt="Fashion" className="hero-img" />
+          <div className="img-glow" />
+        </div>
+        <div className="floating-tag tag-1"><span className="tag-dot" /><span>New Arrivals</span></div>
+        <div className="floating-tag tag-2"><span className="tag-dot" /><span>Best Sellers</span></div>
       </div>
-      <div className="floor-fade"></div>
-
-      <div className="floor"></div>
-    </div>
+    </section>
   );
 }
-
 export default Hero;

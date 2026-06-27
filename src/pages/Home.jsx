@@ -1,28 +1,24 @@
 import React from "react";
-
-import Cart from "./Cart";
 import Hero from "../components/Hero/Hero";
-import Items from "../components/items/Items";
+import Marquee from "../components/Marquee/Marquee";
 import Popular from "../components/Popular/Popular";
 import Offer from "../components/Offer/Offer";
 import Newcollections from "../components/newCollection/Newcollections";
 import Newsletter from "../components/Newsletter/Newsletter";
 import Footer from "../components/Footer/Footer";
-
+import { useScrollReveal } from "../hooks/useScrollReveal";
 function Home() {
-
-  //  u
-
+  useScrollReveal();
   return (
     <div>
-      <Hero/>
+      <Hero />
+      <Marquee />
       <Popular />
-        <Offer />
-        <Newcollections/>
-        <Newsletter/>
-        <Footer/>
+      <Offer />
+      <Newcollections />
+      <Newsletter />
+      <Footer />
     </div>
   );
 }
-
 export default Home;

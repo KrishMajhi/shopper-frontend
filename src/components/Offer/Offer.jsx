@@ -3,85 +3,42 @@ import "./Offer.css";
 import imgOffer1 from "../../assets/men.png";
 import imgOffer2 from "../../assets/girl.png";
 import imgOffer3 from "../../assets/men2.png";
-// import imgOffer4 from "../../assets/men4.png";
-
-const offerSlides = [
-  {
-    heading: "Exclusive Offers For You",
-    description: "Only on Best Sellers products",
-    img: `${imgOffer1}`,
-    background: "linear-gradient(to right, #ff9a9e, #fad0c4)",
-  },
-  {
-    heading: "Summer Sale is Live!",
-    description: "Up to 50% off on selected items",
-    img: `${imgOffer2}`,
-    background: "linear-gradient(to right, #a1c4fd, #c2e9fb)",
-  },
-  {
-    heading: "Limited Time Deal",
-    description: "Grab your favorites before they're gone",
-    img: `${imgOffer3}`,
-    background: "linear-gradient(to right, #d4fc79, #96e6a1)",
-  },
+const SLIDES = [
+  { heading:"Exclusive For You", desc:"Only on Best Sellers products", img:imgOffer1, tag:"Best Sellers" },
+  { heading:"Summer Sale is Live", desc:"Up to 50% off on selected items", img:imgOffer2, tag:"Up to 50% OFF" },
+  { heading:"Limited Time Deal", desc:"Grab your favorites before they're gone", img:imgOffer3, tag:"Ends Soon" },
 ];
-
 function Offer() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false); 
+  const [cur, setCur] = useState(0);
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % offerSlides.length);
-      }, 3000); 
-
-      return () => clearInterval(interval);
-    }
-  }, [isPaused]); 
-
-  
-  
-  const togglePause = () => {
-    setIsPaused(!isPaused);
-  };
-
-  useEffect(() => {
-    console.log("homeEEEEEEEEEEEEEEEEE");
-  }, [])
+    if (paused) return;
+    const id = setInterval(() => setCur(p => (p + 1) % SLIDES.length), 3500);
+    return () => clearInterval(id);
+  }, [paused]);
+  const s = SLIDES[cur];
   return (
-    <div className="offer-container">
-      <div className="main-section">
-        {offerSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`slide ${index === currentSlide ? "active" : ""}`}
-            style={{ background: slide.background }}
-          >
-            <div className="left-section">
-              <h2 className="offer-head">{slide.heading}</h2>
-              {currentSlide == 2 ? (
-                <p className="describesection   desc">{slide.description}</p>
-              ) : (
-                <p className="describesection">{slide.description}</p>
-              )}
-
-              <div className="btnChecknow">Check now</div>
-            </div>
-            <img
-              src={slide.img}
-              alt="Offer"
-              className={`imgoffer imgoffer${index + 1}`} // Dynamically apply the class
-            />
-          </div>
-        ))}
+    <section className="offer-section reveal">
+      <div className="offer-header">
+        <span className="section-eyebrow">Special Offers</span>
+        <h2 className="section-title">Deals Made For You</h2>
       </div>
-
-      {/* Pause/Play Button */}
-      <button className="toggle-btn" onClick={togglePause}>
-        {isPaused ? "Resume" : "Pause"} Slider
-      </button>
-    </div>
+      <div className="offer-card" style={{ '--offer-idx': cur }}>
+        <div className="offer-text">
+          <span className="offer-tag">{s.tag}</span>
+          <h3 className="offer-heading">{s.heading}</h3>
+          <p className="offer-desc">{s.desc}</p>
+          <button className="offer-cta">Shop Now →</button>
+        </div>
+        <img src={s.img} alt="offer" className="offer-img" />
+      </div>
+      <div className="offer-controls">
+        <div className="offer-dots">
+          {SLIDES.map((_, i) => <button key={i} className={`dot${i===cur?" active":""}`} onClick={() => setCur(i)} />)}
+        </div>
+        <button className="pause-btn" onClick={() => setPaused(p => !p)}>{paused ? "▶ Resume" : "⏸ Pause"}</button>
+      </div>
+    </section>
   );
 }
-
 export default Offer;
